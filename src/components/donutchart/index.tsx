@@ -86,7 +86,7 @@ const DonutChart = () => {
   return (
     <>
       <div className="row px-3">
-        <div className="col-sm-12"><h5 className="text-center text-secondary">Dividendos dos últimos {pzero.value} anos %</h5></div>
+        <div className="col-sm-12"><h5 className="text-center text-secondary">Retorno dos dividendos sobre o capital investido </h5><h5 className="text-center text-secondary"> nos últimos {pzero.value} anos %</h5></div>
       </div>
       <div className="row px-3 justify-content-end">
         <div className="col-sm-3">
