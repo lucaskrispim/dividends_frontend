@@ -35,8 +35,8 @@ const DataTable = () => {
         <table className="table table-striped table-sm">
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Setor</th>
+              <th className="d-none d-sm-table-cell" >Nome</th>
+              <th className="d-none d-sm-table-cell" >Setor</th>
               <th>Sigla</th>
               <th>Dividend yield %</th>
               <th>Preço </th>
@@ -47,8 +47,8 @@ const DataTable = () => {
             {
               page.content?.map(x => (
                 <tr key={x.id}>
-                  <td>{x.name} </td>
-                  <td>{x.sector} </td>
+                  <td className="d-none d-sm-table-cell" >{x.name} </td>
+                  <td  className="d-none d-sm-table-cell" >{x.sector} </td>
                   <td> {x.abbreviation} </td>
                   <td> {x.dy.toFixed(2)} </td>
                   <td> R$ {x.price.toFixed(2)} </td>

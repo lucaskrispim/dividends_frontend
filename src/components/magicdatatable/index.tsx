@@ -36,8 +36,8 @@ const MagicDataTable = () => {
           <thead>
             <tr>
               <th>Posição</th>
-              <th>Nome</th>
-              <th>Setor</th>
+              <th className="d-none d-sm-table-cell" >Nome</th>
+              <th className="d-none d-sm-table-cell" >Setor</th>
               <th>Sigla</th>
               <th>EV/EBITDA %</th>
               <th>ROIC %</th>
@@ -49,8 +49,8 @@ const MagicDataTable = () => {
               page.content?.map(x => (
                 <tr key={x.id}>
                   <td>{x.posicao} </td>
-                  <td>{x.name} </td>
-                  <td>{x.sector} </td>
+                  <td className="d-none d-sm-table-cell" >{x.name} </td>
+                  <td className="d-none d-sm-table-cell" >{x.sector} </td>
                   <td> {x.abbreviation} </td>
                   <td> {x.ev} </td>
                   <td> {x.roic} </td>
