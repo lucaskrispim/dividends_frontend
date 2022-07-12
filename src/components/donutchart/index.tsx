@@ -50,7 +50,7 @@ const DonutChart = () => {
   useEffect(() => {
     axios.get(`${BASE_URL}/dividends/api/companiesandreturnsbyperiod?page=1&size=5&period=${pzero.value}y`).then((response) => {
       const data = response.data as CompaniesAndDyByPeriod[];
-      
+
       const myLabels = data.map(x => x.abbreviation);
 
       let mySeries = data.map(x => x.r5);
@@ -85,29 +85,33 @@ const DonutChart = () => {
 
   return (
     <>
-      <div className="row px-3">
-        <div className="col-sm-12"><h5 className="text-center text-secondary">Retorno dos dividendos sobre o capital investido </h5><h5 className="text-center text-secondary"> nos últimos {pzero.value} anos %</h5></div>
-      </div>
-      <div className="row px-3 justify-content-end">
-        <div className="col-sm-3">
-          <select className="form-control" onChange={e => onChangeSelect(e)}>
+      <div className="card h-100">
+        <div className="card-body">
+          <div className="row px-3">
+            <div className="col-sm-12"><h5 className="text-center text-secondary">Retorno dos dividendos ( {pzero.value} anos) %</h5></div>
+          </div>
+          <div className="row px-3 justify-content-end">
+            <div className="col-sm-3">
+              <select className="form-control" onChange={e => onChangeSelect(e)}>
 
-            {periods.map((period) => (
-              <option key={`${period.id}`} value={period.value}>{period.label}</option>
-            ))}
+                {periods.map((period) => (
+                  <option key={`${period.id}`} value={period.value}>{period.label}</option>
+                ))}
 
-          </select>
+              </select>
 
 
 
+            </div>
+          </div>
+          <Chart
+            options={{ ...options, labels: chartData.labels }}
+            series={chartData.series}
+            type="donut"
+            height="240"
+          />
         </div>
       </div>
-      <Chart
-        options={{ ...options, labels: chartData.labels }}
-        series={chartData.series}
-        type="donut"
-        height="240"
-      />
     </>
   );
 }

@@ -1,15 +1,15 @@
 import axios from "axios";
 import Pagination from "components/pagination";
 import { useState, useEffect } from "react";
-import { StockPage } from "types/stock";
+import { MagicStockPage } from "types/stock";
 import { BASE_URL } from "utils/requests";
 
-const DataTable = () => {
+const MagicDataTable = () => {
 
   const [activePage, setActivePage] = useState(1);
 
 
-  const [page, setPage] = useState<StockPage>({
+  const [page, setPage] = useState<MagicStockPage>({
     first: true,
     last: true,
     number: 0,
@@ -18,7 +18,7 @@ const DataTable = () => {
   });
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/dividends/api?page=${activePage}&size=5`)
+    axios.get(`${BASE_URL}/dividends/api/companiesmagicformula?page=${activePage}&size=10`)
       .then(response => {
         setPage(response.data);
       })
@@ -35,11 +35,12 @@ const DataTable = () => {
         <table className="table table-striped table-sm">
           <thead>
             <tr>
+              <th>Posição</th>
               <th>Nome</th>
               <th>Setor</th>
               <th>Sigla</th>
-              <th>Dividend yield %</th>
-              <th>Preço </th>
+              <th>EV/EBITDA %</th>
+              <th>ROIC %</th>
             </tr>
           </thead>
           <tbody>
@@ -47,11 +48,12 @@ const DataTable = () => {
             {
               page.content?.map(x => (
                 <tr key={x.id}>
+                  <td>{x.posicao} </td>
                   <td>{x.name} </td>
                   <td>{x.sector} </td>
                   <td> {x.abbreviation} </td>
-                  <td> {x.dy.toFixed(2)} </td>
-                  <td> R$ {x.price.toFixed(2)} </td>
+                  <td> {x.ev} </td>
+                  <td> {x.roic} </td>
                 </tr>
               ))
             }
@@ -62,4 +64,4 @@ const DataTable = () => {
   );
 }
 
-export default DataTable;
+export default MagicDataTable;

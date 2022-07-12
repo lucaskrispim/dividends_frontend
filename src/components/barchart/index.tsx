@@ -86,7 +86,7 @@ const Barchart = () => {
         },
         series: [
           {
-            name: "% DY "+ pzero.value,
+            name: "% DY " + pzero.value,
             data: mySeries
           }
         ]
@@ -116,29 +116,35 @@ const Barchart = () => {
 
   return (
     <>
-      <div className="row px-3">
-        <div className="col-sm-12"><h5 className="text-center text-secondary">Dividendos dos últimos {pzero.value} anos %</h5></div>
-      </div>
-      <div className="row px-3  justify-content-end">
-        <div className="col-sm-3">
-          <select className="form-control" onChange={e => onChangeSelect(e)}>
+      <div className="card h-100">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-sm-12"><h5 className="text-center text-secondary">Dividendos dos últimos {pzero.value} anos %</h5></div>
+          </div>
+          <div className="row px-2  justify-content-end">
+            <div className="col-sm-3">
+              <select className="form-control" onChange={e => onChangeSelect(e)}>
 
-            {periods.map((period) => (
-              <option key={`${period.id}`} value={period.value}>{period.label}</option>
-            ))}
+                {periods.map((period) => (
+                  <option key={`${period.id}`} value={period.value}>{period.label}</option>
+                ))}
 
-          </select>
+              </select>
 
 
 
+            </div>
+          </div>
+
+
+          <Chart
+            options={{ ...options, xaxis: chartData.labels }}
+            series={chartData.series}
+            type="bar"
+            height="240"
+          />
         </div>
       </div>
-      <Chart
-        options={{ ...options, xaxis: chartData.labels }}
-        series={chartData.series}
-        type="bar"
-        height="240"
-      />
     </>
   );
 }

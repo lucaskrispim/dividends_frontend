@@ -1,7 +1,7 @@
-import { StockPage } from "types/stock";
+import { StockPage, MagicStockPage } from "types/stock";
 
 type Props = {
-  page:StockPage;
+  page:StockPage | MagicStockPage;
   onPageChange:Function;
 }
 
