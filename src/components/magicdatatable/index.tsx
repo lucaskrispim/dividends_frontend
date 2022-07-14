@@ -1,13 +1,16 @@
 import axios from "axios";
 import Pagination from "components/pagination";
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { MagicStockPage } from "types/stock";
+import {MagicStock} from "types/stock";
 import { BASE_URL } from "utils/requests";
 
 const MagicDataTable = () => {
 
-  const [activePage, setActivePage] = useState(1);
+  const navigate = useNavigate();
 
+  const [activePage, setActivePage] = useState(1);
 
   const [page, setPage] = useState<MagicStockPage>({
     first: true,
@@ -23,6 +26,13 @@ const MagicDataTable = () => {
         setPage(response.data);
       })
   }, [activePage]);
+
+  const onClickAbbreviation = (x:MagicStock) => {
+    navigate({
+     pathname:"stocks",
+     search: `stock=${x.abbreviation}`
+    });
+  }
 
   const changePage = (index:number) =>{
     setActivePage(index);
@@ -51,7 +61,7 @@ const MagicDataTable = () => {
                   <td>{x.posicao} </td>
                   <td className="d-none d-sm-table-cell" >{x.name} </td>
                   <td className="d-none d-sm-table-cell" >{x.sector} </td>
-                  <td> {x.abbreviation} </td>
+                  <td onClick={ () => onClickAbbreviation(x)} style={{cursor: "pointer"}}> {x.abbreviation} </td>
                   <td> {x.ev} </td>
                   <td> {x.roic} </td>
                 </tr>
