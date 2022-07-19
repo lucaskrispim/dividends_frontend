@@ -7,6 +7,7 @@ import { BASE_URL } from "utils/requests";
 import { formatLocalDate } from "utils/format";
 
 type SeriesData = {
+  name:string;
   data: number[];
 }
 
@@ -39,6 +40,7 @@ const StockBarchart = () => {
       },
       series: [
         {
+          "name": "",
           data: []
         }
       ]
@@ -84,6 +86,7 @@ const StockBarchart = () => {
         },
         series: [
           {
+            "name":"RSI 14",
             data: mySeries
           }
         ]
