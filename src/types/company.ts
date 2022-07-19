@@ -8,3 +8,22 @@ export type CompaniesAndDyByPeriod = {
   r3:number;
   r5:number;
 }
+
+export type CompaniesStock = {
+  x: string;
+  y: number[];
+
+}
+
+export type CompaniesStockDividends = {
+  Dividends: number;
+  data: string;
+
+}
+
+export type CompaniesRsi = {
+  x: string;
+  rsi: number;
+  
+
+}
