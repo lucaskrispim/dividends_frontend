@@ -7,7 +7,7 @@ import { BASE_URL } from "utils/requests";
 import { formatLocalDate } from "utils/format";
 
 type SeriesData = {
-  name:string;
+  name: string;
   data: number[];
 }
 
@@ -73,10 +73,11 @@ const StockBarchart = () => {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/dividends/api/indicatorbystock?stock=${stock}`).then((response) => {
-      const data = response.data as CompaniesRsi[];
       
-      const myLabels = data.map((item) => 
-       formatLocalDate(item.x.split("T")[0],'dd/MM/yyyy')
+      const data = response.data as CompaniesRsi[];
+
+      const myLabels = data.map((item) =>
+        formatLocalDate(item.x.split("T")[0], 'dd/MM/yyyy')
       )
       const mySeries = data.map(x => parseFloat(x.rsi.toFixed(2)));
 
@@ -86,7 +87,7 @@ const StockBarchart = () => {
         },
         series: [
           {
-            "name":"RSI 14",
+            "name": "RSI 14",
             data: mySeries
           }
         ]
@@ -138,7 +139,27 @@ const StockBarchart = () => {
 
 
           <Chart
-            options={{ ...options, xaxis: chartData.labels }}
+            options={{
+              ...options, xaxis: {
+                type: 'category',
+                categories: chartData.labels.categories,     
+                tickAmount: 4,           
+              },
+               tooltip: {
+                enabled: true, 
+                x:{
+                  show: true,
+                },
+                y:{
+                  
+                },
+                custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+                  return '<div class="arrow_box">' +
+                    '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
+                    '</div>'
+                },
+              }
+            }}
             series={chartData.series}
             type="line"
             height="240"

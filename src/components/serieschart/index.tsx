@@ -33,11 +33,9 @@ const Serieschart = () => {
   useEffect(() => {
 
     axios.get(`${BASE_URL}/dividends/api/candlestickbystock?stock=${stock}`).then((response) => {
-      
       response.data.map((item:CompaniesStock) => {
         item.x = formatLocalDate(item.x.split("T")[0],'dd/MM/yyyy')
       })
-      console.log(response)
       const data = response.data as CompaniesStock[];
 
       setChartData({
@@ -57,14 +55,6 @@ const Serieschart = () => {
         wick: {
           useFillColor: true,
         }
-      },
-      xaxis: {
-        type: 'datetime'
-      },
-      yaxis: {
-        tooltip: {
-          enabled: true
-        }
       }
     }
   };
@@ -77,7 +67,11 @@ const Serieschart = () => {
             <div className="col-sm-12"><h5 className="text-center text-secondary">{stock}</h5></div>
           </div>
           <Chart
-            options={{ ...options }}
+            options={{ ...options, xaxis: {
+                type: 'category',
+                //categories: chartData.labels.categories,     
+                tickAmount: 4,           
+              }, }}
             series={chartData.series}
             type="candlestick"
             height="240"
